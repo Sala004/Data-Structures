@@ -7,7 +7,6 @@ typedef double type;
 
 class Stack {
 private:
-
 	struct Node {
 		double data { };
 		Node* next { };
@@ -16,7 +15,7 @@ private:
 		}
 	};
 
-	Node *head { };		// Points to Top
+	Node *head { };	
 
 public:
 	~Stack() {

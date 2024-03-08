@@ -6,7 +6,6 @@ using namespace std;
 
 class Stack {
 private:
-	// Tip: We can make this struct internally
 	struct Node {
 		int data { };
 		Node* next { };
@@ -15,7 +14,7 @@ private:
 		}
 	};
 
-	Node *head { };		// Points to Top
+	Node *head { };	
 
 public:
 	~Stack() {
