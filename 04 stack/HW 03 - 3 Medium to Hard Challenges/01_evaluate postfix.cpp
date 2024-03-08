@@ -7,7 +7,7 @@ typedef double type;
 
 class Stack {
 private:
-	// Tip: We can make this struct internally
+
 	struct Node {
 		double data { };
 		Node* next { };
@@ -30,14 +30,11 @@ public:
 	}
 
 	void push(double value) {
-		// By design: always new node = head
-		// Great match with stack!
+
 		Node* item = new Node(value);
 		item->next = head;
 		head = item;
 
-		// Tip: This code works as long as machine has more RAM
-		// In industry: You may check if return is null (can't create) or not.
 	}
 
 	double pop() {
