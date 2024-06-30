@@ -37,27 +37,34 @@ public:
             deleted = new PhoneEntry("", ""); //needs a destructor
     }
 
-    bool put(PhoneEntry phone){
+    void put(PhoneEntry phone){
         int idx = phone.hash() % table_size;
+        int step = 0; int original_idx = idx;
 
-        for(int i = 0; i < table_size; i++){
+        
+        do {
             if(!table[idx] || table[idx] == deleted){
                 table[idx] = new PhoneEntry(phone);
-                return true;
+                return;
             }
             else if(table[idx]->name == phone.name){
-                table[idx]->phone_number = phone.phone_number; //update
-                return true;
+                table[idx]->phone_number = phone.phone_number; 
+                return;
             }
-            idx = (idx + 1) % table_size;
-        }
-        return false; //can't insert. full table
+            step++;
+            idx = (idx + step * step) % table_size;
+        } while (idx != original_idx);
+        
+        rehashing();
+        put(phone);
+
     }
 
     bool remove(PhoneEntry phone){
         int idx = phone.hash() % table_size;
+        int original_idx = idx; int step = 0;
 
-        for(int i = 0; i < table_size; i++){
+        do{
             if(!table[idx]){
                 break; //empty
             }
@@ -66,11 +73,27 @@ public:
                 table[idx] = deleted;
                 return true;
             }
-
-            idx = (idx + 1) % table_size; //move next
-        }
+            step++;
+            idx = (idx + step * step) % table_size; //move next
+        } while(idx != original_idx);
 
         return false;
+    }
+
+    void rehashing(){
+        cout << "rehashing\n";
+        PhoneHashTable new_table(2 * table_size);
+
+        for(int hash = 0; hash < table_size; hash++){
+            if(table[hash] == deleted || !table[hash]){
+                continue;
+            }
+
+            new_table.put(*table[hash]);
+        }
+
+        table_size *= 2;
+        table = new_table.table;
     }
 
     void print_all(){
@@ -104,10 +127,10 @@ int main(){
 
     table.print_all();
 
-    cout << table.remove(PhoneEntry("ali","")) << endl;
-    cout << table.remove(PhoneEntry("smith","")) << endl;
-    cout << table.remove(PhoneEntry("john","")) << endl;
+    table.remove(PhoneEntry("ali", ""));
+    table.remove(PhoneEntry("john", ""));
 
     table.print_all();
+
 
 }
