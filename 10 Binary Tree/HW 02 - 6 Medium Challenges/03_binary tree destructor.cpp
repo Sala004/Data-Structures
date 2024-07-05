@@ -34,15 +34,23 @@ public:
         }
     }
 
-    int countNodes(int res = 1){
-        if(left){
-            res = 1 + left->countNodes(res);
-        }
-        if(right){
-            res = 1 + right->countNodes(res);
-        }
-        return res;
+    ~BinaryTree(){
+        clear();
+        cout <<  data << " has been deleted!" << endl; 
     }
+
+    void clear(){
+        if(left){
+            delete left;
+            left = nullptr;
+        }
+
+        if(right){
+            delete right;
+            right = nullptr;
+        }
+    }
+
     
 
 };
@@ -55,5 +63,4 @@ int main(){
     tree.add( { 2, 5, 9 }, { 'L', 'R', 'R'});
     tree.add({3, 6, 10}, {'R', 'R', 'L'});
 
-    cout << tree.countNodes();
 }

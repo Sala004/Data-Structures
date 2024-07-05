@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <cmath>
 using namespace std;
 
 class BinaryTree{
@@ -34,6 +34,17 @@ public:
         }
     }
 
+    int treeHeight(){
+        int res = 0;
+        if(left){
+            res = 1 + left->treeHeight();
+        }
+        if(right){
+            res = max(res, right->treeHeight());
+        }
+        return res;
+    }
+
     int countNodes(int res = 1){
         if(left){
             res = 1 + left->countNodes(res);
@@ -43,6 +54,25 @@ public:
         }
         return res;
     }
+
+
+    bool isPerfect(int height){
+        
+        if(!right && !left){
+            return height == 0;
+        }
+        if(left && !right || !left && right){
+            return false; //one child
+        }
+
+        return left->isPerfect(height - 1) && right->isPerfect(height - 1);
+    }
+
+    bool isPerfectFormula(){
+        int h = treeHeight();
+        int n = countNodes();
+        return pow(2, h + 1) - 1 == n;
+    }
     
 
 };
@@ -50,10 +80,12 @@ public:
 
 int main(){
     BinaryTree tree(1);
-    tree.add({2, 4, 7}, {'L', 'L', 'L'});
-    tree.add({2, 4, 8}, {'L', 'L', 'R'});
-    tree.add( { 2, 5, 9 }, { 'L', 'R', 'R'});
-    tree.add({3, 6, 10}, {'R', 'R', 'L'});
+    tree.add({2, 4}, {'L', 'L'});
+    tree.add({2, 5}, {'L', 'R'});
+    tree.add({3, 10}, {'R', 'L'});
+    tree.add({3, 6}, {'R', 'R'});
 
-    cout << tree.countNodes();
+    int h = tree.treeHeight();
+    cout << tree.isPerfect(h) << endl;
+    cout << tree.isPerfectFormula() << endl;
 }

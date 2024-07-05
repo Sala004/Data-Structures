@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <stack>
 using namespace std;
 
 class BinaryTree{
@@ -33,17 +33,24 @@ public:
 
         }
     }
-
-    int countNodes(int res = 1){
-        if(left){
-            res = 1 + left->countNodes(res);
-        }
-        if(right){
-            res = 1 + right->countNodes(res);
-        }
-        return res;
-    }
     
+   void inorderIterative() {
+    stack<BinaryTree*> stk;
+    BinaryTree* current = this;  
+
+    while (current || !stk.empty()) {
+        while (current) {
+            stk.push(current);
+            current = current->left;
+        }
+
+        current = stk.top();
+        stk.pop();
+        cout << current->data << " ";
+
+        current = current->right;
+    }
+}
 
 };
 
@@ -55,5 +62,6 @@ int main(){
     tree.add( { 2, 5, 9 }, { 'L', 'R', 'R'});
     tree.add({3, 6, 10}, {'R', 'R', 'L'});
 
-    cout << tree.countNodes();
+    tree.inorderIterative();
+
 }

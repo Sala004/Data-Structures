@@ -35,7 +35,7 @@ public:
     }
 
     int countLeafs(int res = 0){
-        if(!left || !right){
+        if(!left && !right){
             return 1;
         }
 

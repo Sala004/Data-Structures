@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
 class BinaryTree{
@@ -34,14 +33,21 @@ public:
         }
     }
 
-    int countNodes(int res = 1){
-        if(left){
-            res = 1 + left->countNodes(res);
+    void traverseLeftBoundry(){
+        cout << data << " ";
+
+        if(!left && !right){
+            return;
         }
-        if(right){
-            res = 1 + right->countNodes(res);
+
+        else if(left){
+            left->traverseLeftBoundry();
         }
-        return res;
+
+        else if(right){
+            right->traverseLeftBoundry();
+        }
+
     }
     
 
@@ -50,10 +56,10 @@ public:
 
 int main(){
     BinaryTree tree(1);
-    tree.add({2, 4, 7}, {'L', 'L', 'L'});
-    tree.add({2, 4, 8}, {'L', 'L', 'R'});
-    tree.add( { 2, 5, 9 }, { 'L', 'R', 'R'});
-    tree.add({3, 6, 10}, {'R', 'R', 'L'});
+    tree.add( { 2, 4, 5, 6, 7, 9, 11 }, { 'L', 'L', 'R', 'R', 'L', 'L', 'R' });
+	tree.add( { 2, 4, 5, 6, 8 }, { 'L', 'L', 'R', 'R', 'R' });
+	tree.add( { 2, 4, 5, 6, 7, 10 }, { 'L', 'L', 'R', 'R', 'L', 'R' });
+	tree.add( { 3 }, { 'R' });
 
-    cout << tree.countNodes();
+    tree.traverseLeftBoundry();
 }
