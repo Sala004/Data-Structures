@@ -34,13 +34,14 @@ public:
         }
     }
 
-    int treeHeight(){
-        int res = 0;
-        if(left){
-            res = 1 + left->treeHeight();
+    bool isExist(int val){
+        bool res = val == data;
+
+        if(!res && left){
+            res = left->isExist(val);
         }
-        if(right){
-            res = max(res, right->treeHeight());
+        if(!res && right){
+            res = right->isExist(val);
         }
         return res;
     }
@@ -56,5 +57,5 @@ int main(){
     tree.add( { 2, 5, 9 }, { 'L', 'R', 'R'});
     tree.add({3, 6, 10}, {'R', 'R', 'L'});
 
-    cout << tree.treeHeight();
+    cout << tree.isExist(9);
 }

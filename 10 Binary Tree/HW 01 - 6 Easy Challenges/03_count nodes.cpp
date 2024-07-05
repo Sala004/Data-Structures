@@ -34,13 +34,12 @@ public:
         }
     }
 
-    int treeHeight(){
-        int res = 0;
+    int countNodes(int res = 0){
         if(left){
-            res = 1 + left->treeHeight();
+            res = 1 + left->countNodes(res);
         }
         if(right){
-            res = max(res, right->treeHeight());
+            res = 1 + right->countNodes(res);
         }
         return res;
     }
@@ -56,5 +55,5 @@ int main(){
     tree.add( { 2, 5, 9 }, { 'L', 'R', 'R'});
     tree.add({3, 6, 10}, {'R', 'R', 'L'});
 
-    cout << tree.treeHeight();
+    cout << tree.countNodes();
 }
