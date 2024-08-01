@@ -17,6 +17,27 @@ public:
         return curr;
     }
 
+    void insert(int target) {
+		if (target < val) {
+			if (!left) {
+				left = new BinarySearchTree(target);
+			} else
+				left->insert(target);
+		} else if (target > val) {
+			if (!right)
+				right = new BinarySearchTree(target);
+			else
+				right->insert(target);
+		} // else: exists already
+	}
+
+
+    void special_delete(BinarySearchTree* child){
+        val = child->val;
+        left = child->left;
+        right = child->right;
+        delete child;
+    }
     BinarySearchTree* deleteNode(BinarySearchTree* root, int key) {
         if(!root) return nullptr;
 
@@ -33,10 +54,10 @@ public:
                 root = nullptr;
             }
             else if(!root->right){
-                root = root->left;
+                root->special_delete(root->left);
             }
             else if(!root->left){
-                root = root->right;
+                root->special_delete(root->right);
             }
             else{
                 BinarySearchTree* mx = maxNode(root->left);
@@ -44,9 +65,15 @@ public:
                 root->left = deleteNode(root->left, root->val);
                 tmp = nullptr; 
             }
-            if(tmp) delete tmp;
         }
 
         return root;
     }
 };
+
+int main(){
+    BinarySearchTree tree(10);
+    tree.insert(5);
+    tree.deleteNode(&tree, 10);
+    return 0;
+}
