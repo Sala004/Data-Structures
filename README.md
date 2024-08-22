@@ -5,4 +5,4 @@ This repo documents my journey through studying data structures, one of the most
 
 ### Resources
 
-There are many well-known courses that provide comprehensive content and clear explanations. I personally used different resources and switched between them smoothly, but sticking with one resource is preferable.
+There are many well-known courses that provide comprehensive content and clear explanations. I personally used various resources and switched between them smoothly, but sticking with one resource is preferable. 
