@@ -4,6 +4,12 @@
         "xhash": "cpp",
         "xstring": "cpp",
         "utility": "cpp",
-        "iostream": "cpp"
-    }
+        "iostream": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "unordered_map": "cpp",
+        "xtree": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
