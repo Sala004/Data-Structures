@@ -1,7 +1,7 @@
 # Data Structures
 
 ### Overview
-This repo documents my journey through studying data structures, one of the most important topics in computer science. I've consumed a lot of content and solved a bunch of problems, and I created this list to track my progress, so I appreciate this list. It has helped me understand complex topics clearly because the challenges gradually become harder.
+In this repo, I'm tracking my progress on my journey to learn and master Data Structures, and I'm also sharing my solutions with others.
 
 ### Resources
 
