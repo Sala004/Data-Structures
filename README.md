@@ -1,7 +1,7 @@
 # Data Structures
 
 ### Overview
-In this repo, I'm tracking my progress on my journey to learn and master Data Structures, and I'm also sharing my solutions with others.
+In this repo, I'm tracking my progress on my journey to learn and master data structures, and I'm also sharing my solutions with others.
 
 ### Resources
 
